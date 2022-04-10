@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xs#n#jnagrk=587^^q8)g5rh3&c)%47iuxr+l&2bcxasy_z_9w'
+SECRET_KEY = 'django-insecure-bn)b8p#_3xwa7pl=0r9y)d*ktzm+w9!-xz!5py^a=v443b#w6a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'autoskola.apps.AutoskolaConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
