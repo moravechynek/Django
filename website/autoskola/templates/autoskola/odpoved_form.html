@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!--
+                <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            -->
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/autoskola">Domů <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/autoskola/odpoved-create">Test</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+    </header>
+    <h1 class="text-center py-3">Form</h1>
+    <div class="container">
+        <div class="p-4">
+            <p><b>{{ otazka.id }}. {{ otazka.otazka }}</b></p>
+            <p><b>A: <span>{{ otazka.odpoved_a }}</b></span></p>
+            <p><b>B: <span>{{ otazka.odpoved_b }}</b></span></p>
+            <p><b>C: <span>{{ otazka.odpoved_c }}</b></span></p>
+        </div>
+
+        <form method="POST" action="/autoskola/odpoved-create">
+            {% csrf_token %}
+            <input id="otazka" type="text" name="otazka" value="{{ otazka.id }}">
+            <label for="odpoved">Vaše odpověď </label>
+            <input id="odpoved" type="text" name="odpoved" value="">
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    
+</body>
+</html>

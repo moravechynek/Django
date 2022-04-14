@@ -22,6 +22,10 @@ class Zakon(models.Model):
         choices=TYP,
         default=ZAKON,
     )
+
+    def __str__ (self):
+        return (self.cislo + " " + self.nazev)
+
     class Meta:
         verbose_name = 'Zákon'
         verbose_name_plural = 'Zákony'
@@ -102,6 +106,10 @@ class Otazka(models.Model):
         blank=True,
         null=True
     )
+
+    def __str__ (self):
+        return (str(self.id) + ") " + self.otazka)
+
     class Meta:
         verbose_name = 'Otázka'
         verbose_name_plural = 'Otázky'
