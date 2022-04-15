@@ -37,34 +37,33 @@
     </header>
     <h1 class="text-center py-3">Otázky do autoškoly</h1>
     <div class="container">
-        {% if questions %}
-    {% for question in questions %}
-    {% if question.spravna_odpoved == 'a' %}
-    <div class="p-4">
+      {% for question in questions %}
+      <div class="p-4">
         <p><b>{{ question.id }}. {{ question.otazka }}</b></p>
+        {% if question.obrazek %}
+        <img src={{ "/website/autoskola/static/img/otazky/"|add:question.obrazek }} alt={{ question.obrazek }}>
+        {% endif %}
+        {% if question.spravna_odpoved == 'a' %}
         <p><b>A: <span class="text-success">{{ question.odpoved_a }}</b></span></p>
         <p><b>B: <span class="text-danger">{{ question.odpoved_b }}</b></span></p>
-        <p><b>C: <span class="text-danger">{{ question.odpoved_c }}</b></span></p>
-    </div>
-    {% elif question.spravna_odpoved == 'b' %}
-    <div class="p-4">
-        <p><b>{{ question.id }}. {{ question.otazka }}</b></p>
+          {% if question.odpoved_c %}
+          <p><b>C: <span class="text-danger">{{ question.odpoved_c }}</b></span></p>
+          {% endif %}
+        {% elif question.spravna_odpoved == 'b' %}
         <p><b>A: <span class="text-danger">{{ question.odpoved_a }}</b></span></p>
         <p><b>B: <span class="text-success">{{ question.odpoved_b }}</b></span></p>
-        <p><b>C: <span class="text-danger">{{ question.odpoved_c }}</b></span></p>
-    </div>
-    {% elif question.spravna_odpoved == 'c' %}
-    <div class="p-4">
-        <p><b>{{ question.id }}. {{ question.otazka }}</b></p>
+        {% if question.odpoved_c %}
+          <p><b>C: <span class="text-danger">{{ question.odpoved_c }}</b></span></p>
+          {% endif %}
+        {% elif question.spravna_odpoved == 'c' %}
         <p><b>A: <span class="text-danger">{{ question.odpoved_a }}</b></span></p>
         <p><b>B: <span class="text-danger">{{ question.odpoved_b }}</b></span></p>
-        <p><b>C: <span class="text-success">{{ question.odpoved_c }}</b></span></p>
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% else %}
-    <p>Questions are available.</p>
-    {% endif %}
+        {% if question.odpoved_c %}
+          <p><b>C: <span class="text-success">{{ question.odpoved_c }}</b></span></p>
+          {% endif %}
+        {% endif %}
+      </div>
+      {% endfor %}
     </div>
 
 </body>

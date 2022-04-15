@@ -1,3 +1,4 @@
+from ssl import ALERT_DESCRIPTION_UNSUPPORTED_CERTIFICATE
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -26,14 +27,15 @@ def download_image(download_path, url, file_name):
         print('ERROR FOUND')
 
 driver = webdriver.Chrome()
+driver.implicitly_wait(0.1)
 driver.get('https://etesty2.mdcr.cz/Test/TestPractise/15')
 html = driver.page_source
-f = open('etesty2.csv', 'w')
+f = open('etesty.csv', 'w')
 i = 0
 images_urls = []
 
 # The first line of .csv
-f.write('question;a;b;c;correct;image\n')
+f.write('question;image;a;b;c;correct\n')
 f.close()
 
 # Clicking the sort button
@@ -54,55 +56,68 @@ while i in range(928): #928
     if driver.find_elements(By.CLASS_NAME, 'question-text')[0].text == '':
         question = driver.find_elements(By.CLASS_NAME, 'question-text')[1].text
     
-    # ANSWERES
-    a = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[1]/p')
-    b = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[2]/p').text
-    answers_container = driver.find_elements(By.XPATH, '//*[@id="questionContentID"]/div[2]/*')
-    # print('Container length ' + str(len(answers_container)))
-    if len(answers_container) == 3:
-        c = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[3]/p').text
-    elif len(answers_container) == 2:
-        c = 'none'
-    else: print('Some error')
-    
     # IMAGE
+    image_name = ''
     try:
         image_path = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[1]/img').get_attribute('src')
         image_alt = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[1]/img').get_attribute('alt').split('.')
         image_format = image_alt[1]
-        images_urls.append([image_path, str(i+1) + '.' + image_format])
-
+        image_name = str(i+1) + '.' + image_format
+        images_urls.append([image_path, image_name])
     except Exception as e:
         print('')
     
-    # CORRECT
+    # CLICK CORRECT
+    a = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[1]/p')
     a.click()
     next = driver.find_element(By.XPATH, '//*[@id="nextButtonID"]')
     next.click()
-    
-    correct_answer = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[contains(concat(" ", @class, " "), " correct ")]/p').text
-    correct = ''
-    if correct_answer == a.text: correct = 'a'
-    elif correct_answer == b: correct = 'b'
-    elif correct_answer == c: correct = 'c'
-    
+
     if i < 9:
         question_num = question_ID.text[-1]
     elif i < 99:
         question_num = question_ID.text[-2:]
     else: question_num = question_ID.text[-3:]
+
+    # ANSWERES
+    a = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[1]/p')
+    b = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[2]/p')
+    answers_container = driver.find_elements(By.XPATH, '//*[@id="questionContentID"]/div[2]/*')
+    if len(answers_container) == 3:
+        c = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[3]/p')
+        print(question_num)
+        print(type(c))
+        print()
+    elif len(answers_container) == 2:
+        c = ''
+        print(question_num)
+        print(type(c))
+        print()
+    else: print('Some error')
+    correct_answer = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[contains(concat(" ", @class, " "), " correct ")]/p')
+    correct = ''
+    if correct_answer == a: correct = 'a'
+    elif correct_answer == b: correct = 'b'
+    elif correct_answer == c: correct = 'c'
+    
     
 
-    f = open('etesty2.csv', 'a')
-    f.write(question + ';' + a.text + ';' + b + ';' + c + ';' + correct + '\n')
+    f = open('etesty.csv', 'a')
+    if str(type(c)).find('selenium') != -1:
+        f.write(question + ';' + image_name + ';' + a.text + ';' + b.text + ';' + c.text + ';' + correct + '\n')
+    else:
+        f.write(question + ';' + image_name + ';' + a.text + ';' + b.text + ';' + c + ';' + correct + '\n')
     f.close()
+    """
     print(question_num)
     print(question)
     print('A       ' + a.text)
-    print('B       ' + b)
-    print('C       ' + c)
+    print('B       ' + b.text)
+    print('C       ' + c.text)
     print('Correct ' + correct)
+    print('imgName ' + image_name)
     print()
+    """
     
     next.click()
 

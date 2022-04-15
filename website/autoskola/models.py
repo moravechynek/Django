@@ -1,11 +1,11 @@
 import os
 from django.db import models
 
-def get_image_path(instance, filename):
-    return os.path.join('znacky', '%s' % str(instance.cislo), filename)
+def get_image_znacky(instance, filename):
+    return os.path.join('autoskola/static/img/znacky', filename)
 
 def get_image_otazky(instance, filename):
-    return os.path.join('otazky', '%s' % str(instance.id), filename)
+    return os.path.join('autoskola/static/img/otazky', filename)
 
 class Zakon(models.Model):
     cislo = models.CharField(max_length=50) # might be atomic
@@ -32,7 +32,7 @@ class Zakon(models.Model):
 
 class Znacka(models.Model):
     cislo = models.CharField(max_length=10) # cely
-    obrazek = models.ImageField(upload_to=get_image_path)
+    obrazek = models.ImageField(upload_to=get_image_znacky)
     nazev = models.CharField(max_length=50)
     vyznam = models.TextField(max_length=500)
     VYSTRAZNE = 'A'
