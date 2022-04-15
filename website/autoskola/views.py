@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.db.models import Avg
 
 from autoskola.models import Otazka, Odpoved
 
@@ -23,3 +24,9 @@ class TestCreate(CreateView):
         otazka = Otazka.objects.order_by('?')[0]
         context["otazka"] = otazka
         return context
+
+def stat(request):
+    template = loader.get_template('autoskola/statistics.html')
+    context = {
+    }
+    return HttpResponse(template.render(context, request))

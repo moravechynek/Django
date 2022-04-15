@@ -135,6 +135,10 @@ class Odpoved(models.Model):
     )
     odpoved = models.TextField(max_length=150)
     timestamp = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.FK_otazka).split(')')[0] + ') ' + self.odpoved + ' ' + str(self.timestamp)
+
     class Meta:
         verbose_name = 'Odpověď'
         verbose_name_plural = 'Odpovědi'

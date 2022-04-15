@@ -5,5 +5,6 @@ from .views import TestCreate
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('odpoved-create', TestCreate.as_view(), name='odpoved-create')
+    path('odpoved-create', TestCreate.as_view(), name='odpoved-create'),
+    path('statistiky', views.stat, name='stat'),
 ]

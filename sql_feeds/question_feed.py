@@ -9,7 +9,7 @@ while i < 928: #928
     line = f.readline().split(';')
     id = i + 1
     question = line[0]
-    image = line[1]
+    image = 'autoskola/static/img/otazky/' + line[1]
     a = line[2]
     b = line[3]
     c = line[4]

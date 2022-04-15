@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block style %}<style>
+    th, td {
+        max-width: 10px !important;
+        max-height: 1px !important;
+    }
+</style>{% endblock style %}
+
+{% block title %}Statistiky{% endblock %}
+
+
+{% block headline %}<h1 class="text-center p-3">Statistiky</h1>{% endblock %}
+
+
+{% block content %}
+    {% lorem 1 b random %}
+{% endblock %}
+
