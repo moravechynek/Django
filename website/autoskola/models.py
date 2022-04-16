@@ -5,7 +5,7 @@ def get_image_znacky(instance, filename):
     return os.path.join('autoskola/static/img/znacky', filename)
 
 def get_image_otazky(instance, filename):
-    return os.path.join('autoskola/static/img/otazky', filename)
+    return os.path.join('otazky', filename)
 
 class Zakon(models.Model):
     cislo = models.CharField(max_length=50) # might be atomic

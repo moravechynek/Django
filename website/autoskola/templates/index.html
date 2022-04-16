@@ -9,8 +9,8 @@
 {% for question in questions %}
 <div class="p-4">
   <p><b>{{ question.id }}. {{ question.otazka }}</b></p>
-  {% if question.obrazek %}
-  <img src={{ "/website/autoskola/static/img/otazky/"|add:question.obrazek }} alt={{ question.obrazek }}>
+  {% if question.obrazek%}
+  <img src={{ question.obrazek.url }} alt={{ question.obrazek.url }}>
   {% endif %}
   {% if question.spravna_odpoved == 'a' %}
   <p><b>A: <span class="text-success">{{ question.odpoved_a }}</b></span></p>

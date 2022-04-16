@@ -2,14 +2,11 @@
 
 {% block title %}Test{% endblock %}
 
-
-{% block headline %}<h1 class="text-center py-3">Test</h1>{% endblock %}
-
 {% block content %}
 <div class="p-4">
   <p><b>{{ otazka.id }}. {{ otazka.otazka }}</b></p>
   {% if otazka.obrazek %}
-  <img src={{ "/website/autoskola/static/img/otazky/"|add:otazka.obrazek }} alt={{ otazka.obrazek }}>
+  <img src={{ otazka.obrazek.url }} alt={{ otazka.obrazek.url }}>
   {% endif %}
   <p><b>A: <span>{{ otazka.odpoved_a }}</b></span></p>
   <p><b>B: <span>{{ otazka.odpoved_b }}</b></span></p>
