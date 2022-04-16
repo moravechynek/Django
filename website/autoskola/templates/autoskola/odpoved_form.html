@@ -15,11 +15,9 @@
   {% endif %}
 </div>
 
-<form method="POST" action="/autoskola/odpoved-create">
+<form method="POST" action="">
   {% csrf_token %}
-  <input id="otazka" type="text" name="otazka" value="{{ otazka.id }}">
-  <label for="odpoved">Vaše odpověď </label>
-  <input id="odpoved" type="text" name="odpoved" value="">
+  {{ form }}
 
   <input type="submit" value="Submit">
 </form>

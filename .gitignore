@@ -1,3 +1,4 @@
 /scrapers/chromedriver.exe
 /sql_feeds/answer_select.py
-/sql_feeds/select_otazka.pys
+/sql_feeds/select_otazka.py
+/sql_feeds/delete_answeres.py

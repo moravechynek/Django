@@ -2,9 +2,9 @@ from django.http import HttpResponse
 from django.template import loader
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from django.db.models import Avg
 
 from autoskola.models import Otazka, Odpoved
+from autoskola.forms import OdpovedForm
 
 def index(request):
     questions = Otazka.objects.all()
@@ -16,8 +16,8 @@ def index(request):
 
 class TestCreate(CreateView):
     model = Odpoved
-    fields = '__all__'
-    success_url = reverse_lazy('odpoved')
+    success_url = reverse_lazy('odpoved-create')
+    form_class = OdpovedForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
