@@ -1,9 +1,9 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
-from autoskola.models import Otazka, Odpoved
+from autoskola.models import Otazka, Odpoved, Zakon, Znacka, Odstavec
 from autoskola.forms import OdpovedForm
 
 def index(request):
@@ -30,3 +30,18 @@ def stat(request):
     context = {
     }
     return HttpResponse(template.render(context, request))
+
+def get_data(request):
+    otazky = Otazka.objects.all().count()
+    odpovedi = Odpoved.objects.all().count()
+    znacky = Znacka.objects.all().count()
+    odstavce = Odstavec.objects.all().count()
+    zakony = Znacka.objects.all().count()
+
+    labels = ['Otázky', 'Odpovědi', 'Značky', 'Odstavce', 'Zákony']
+    default = [otazky, odpovedi, znacky, odstavce, zakony]
+    data = {
+        "labels": labels,
+        "default": default,
+    }
+    return JsonResponse(data)
