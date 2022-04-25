@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Značky{% endblock title %}
+
+{% block headline %}<h1 class="text-center py-3">Dopravní značky</h1>{% endblock headline %}
+
+{% block content %}
+<div class="container">
+<table class="table">
+    <tr>
+        <th>Číslo</th>
+        <th>Obrázek</th>
+        <th>Název</th>
+        <th>Význam</th>
+{% for znacka in znacky %}
+<tr>
+    <td>{{ znacka.cislo }}</td>
+    <td><img src={{ znacka.obrazek.url }} alt={{ znacka.obrazek.url }}></td>
+    <td>{{ znacka.nazev }}</td>
+    <td>{{ znacka.vyznam }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+{% endblock content %}

@@ -33,8 +33,8 @@ class Zakon(models.Model):
 class Znacka(models.Model):
     cislo = models.CharField(max_length=10) # cely
     obrazek = models.ImageField(upload_to=get_image_znacky)
-    nazev = models.CharField(max_length=50)
-    vyznam = models.TextField(max_length=500)
+    nazev = models.CharField(max_length=95)
+    vyznam = models.TextField(max_length=925)
     VYSTRAZNE = 'A'
     UPRAVUJICI_PREDNOST = 'P'
     ZAKAZOVE = 'B'
@@ -82,6 +82,8 @@ class Znacka(models.Model):
         choices=TYP,
         default=VYSTRAZNE,
     )
+    def __str__ (self):
+        return (self.cislo + " " + self.nazev)
     class Meta:
         verbose_name = 'Značka'
         verbose_name_plural = 'Značky'
@@ -90,9 +92,9 @@ class Otazka(models.Model):
     otazka = models.TextField(max_length=150)
     obrazek = models.ImageField(upload_to=get_image_otazky,
         blank=True)
-    odpoved_a = models.TextField(max_length=150)
-    odpoved_b = models.TextField(max_length=150)
-    odpoved_c = models.TextField(max_length=150)
+    odpoved_a = models.TextField(max_length=300)
+    odpoved_b = models.TextField(max_length=300)
+    odpoved_c = models.TextField(max_length=300)
     spravna_odpoved = models.CharField(max_length=1)
     FK_odstavec = models.ForeignKey(
         'Odstavec',

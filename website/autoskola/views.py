@@ -45,3 +45,11 @@ def get_data(request):
         "default": default,
     }
     return JsonResponse(data)
+
+def znacky(request):
+    znacky = Znacka.objects.all()
+    template = loader.get_template('autoskola/znacky.html')
+    context = {
+        'znacky': znacky,
+    }
+    return HttpResponse(template.render(context, request))
