@@ -18,7 +18,18 @@
 <form method="POST" action="">
   {% csrf_token %}
   {{ form }}
-
+  
+  <input type="submit" value="Submit">
+</form>
+<form method="POST" action="">
+  <input type="text" value="{{ otazka.id }}">
+  <p><b>{{ otazka.otazka }}</b></p>
+  <input type="radio" id="answer1" name="answer1">
+  <label for="answer1">A: <span>{{ otazka.odpoved_a }}</b></span></label><br>
+  <input type="radio" id="answer2" name="answer1">
+  <label for="answer2">B: <span>{{ otazka.odpoved_b }}</b></span></label><br>
+  <input type="radio" id="answer3" name="answer1">
+  <label for="answer3">C: <span>{{ otazka.odpoved_c }}</b></span></label><br>
   <input type="submit" value="Submit">
 </form>
 {% endblock %}
