@@ -3,33 +3,13 @@
 {% block title %}Test{% endblock %}
 
 {% block content %}
-<div class="p-4">
-  <p><b>{{ otazka.id }}. {{ otazka.otazka }}</b></p>
-  {% if otazka.obrazek %}
-  <img src={{ otazka.obrazek.url }} alt={{ otazka.obrazek.url }}>
-  {% endif %}
-  <p><b>A: <span>{{ otazka.odpoved_a }}</b></span></p>
-  <p><b>B: <span>{{ otazka.odpoved_b }}</b></span></p>
-  {% if otazka.odpoved_c %}
-  <p><b>C: <span>{{ otazka.odpoved_c }}</b></span></p>
-  {% endif %}
-</div>
-
 <form method="POST" action="">
-  {% csrf_token %}
-  {{ form }}
-  
-  <input type="submit" value="Submit">
-</form>
-<form method="POST" action="">
-  <input type="text" value="{{ otazka.id }}">
-  <p><b>{{ otazka.otazka }}</b></p>
-  <input type="radio" id="answer1" name="answer1">
-  <label for="answer1">A: <span>{{ otazka.odpoved_a }}</b></span></label><br>
-  <input type="radio" id="answer2" name="answer1">
-  <label for="answer2">B: <span>{{ otazka.odpoved_b }}</b></span></label><br>
-  <input type="radio" id="answer3" name="answer1">
-  <label for="answer3">C: <span>{{ otazka.odpoved_c }}</b></span></label><br>
-  <input type="submit" value="Submit">
+    {% csrf_token %}
+    <h3>{{ otazka.id }}. {{ otazka.otazka }}</h3>
+    <!--
+    Proměnná {{ form.odpoved }} vygeneruje pouze tu část formuláře, která se týká odpovědi
+    -->
+    <div>{{ form.odpoved }}</div>
+    <input type="submit" value="Odeslat">
 </form>
 {% endblock %}

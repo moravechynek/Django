@@ -1,4 +1,5 @@
 from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect
 from django.template import loader
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
@@ -24,7 +25,19 @@ class TestCreate(CreateView):
         otazka = Otazka.objects.order_by('?')[0]
         context["otazka"] = otazka
         return context
-
+def test_create(request):
+    otazka = Otazka.objects.order_by('?')[0]
+    if request.method == "POST":
+        form = OdpovedForm(request.POST, otazka=otazka)
+        if form.is_valid():
+            print(form)
+            odpoved = form.save(commit=False)
+            odpoved.FK_otazka = otazka
+            odpoved.save()
+            return redirect('odpoved-create')
+    else:
+        form = OdpovedForm(otazka=otazka)
+    return render(request, 'autoskola/odpoved_form.html', {'form': form, 'otazka': otazka })
 def stat(request):
     template = loader.get_template('autoskola/statistics.html')
     context = {
