@@ -90,7 +90,7 @@ class Znacka(models.Model):
 
 class Otazka(models.Model):
     otazka = models.TextField(max_length=150)
-    obrazek = models.ImageField(upload_to=get_image_otazky,
+    file = models.FileField(upload_to=get_image_otazky,
         blank=True)
     odpoved_a = models.TextField(max_length=300)
     odpoved_b = models.TextField(max_length=300)

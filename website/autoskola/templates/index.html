@@ -9,8 +9,8 @@
 {% for question in questions %}
 <div class="p-4">
   <p><b>{{ question.id }}. {{ question.otazka }}</b></p>
-  {% if question.obrazek%}
-  <img src={{ question.obrazek.url }} alt={{ question.obrazek.url }}>
+  {% if question.file%}
+  <img src={{ question.file.url }} alt={{ question.file.url }}>
   {% endif %}
   {% if question.spravna_odpoved == 'a' %}
   <p><b>A: <span class="text-success">{{ question.odpoved_a }}</b></span></p>

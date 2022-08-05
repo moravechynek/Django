@@ -5,7 +5,7 @@ cur = con.cursor()
 f = open('../scrapers/etesty.csv', 'r')
 i = 0
 f.readline()
-while i < 928: #928
+while i < 959: #959
     line = f.readline().split(';')
     id = i + 1
     question = line[0]
@@ -27,8 +27,6 @@ while i < 928: #928
     print(correct)
     print()
     i += 1
-
-#cur.execute("DELETE FROM autoskola_otazka WHERE id != 0;")
 
 con.commit()
 

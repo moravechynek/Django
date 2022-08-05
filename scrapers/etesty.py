@@ -1,4 +1,3 @@
-from ssl import ALERT_DESCRIPTION_UNSUPPORTED_CERTIFICATE
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -6,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
 import io
+import urllib.request
 
 def download_image(download_path, url, file_name):
     try:
@@ -20,6 +20,9 @@ def download_image(download_path, url, file_name):
         elif file_name.split('.')[1] == 'gif':
             with open(file_path, 'wb') as f:
                 image.save(f, 'GIF')
+        elif file_name.split('.')[1] == 'png':
+            with open(file_path, 'wb') as f:
+                image.save(f, 'PNG')
 
         print('Success\n')
 
@@ -33,6 +36,7 @@ html = driver.page_source
 f = open('etesty.csv', 'w')
 i = 0
 images_urls = []
+videos = []
 
 # The first line of .csv
 f.write('question;image;a;b;c;correct\n')
@@ -43,7 +47,7 @@ sort = driver.find_element(By.XPATH, '//*[@id="sortRandomButtonID"]')
 sort.click()
 
 # Getting the data
-while i in range(928): #928
+while i in range(959): #959
     try:
         question_ID = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.ID, "questionNumberID"))
@@ -66,6 +70,12 @@ while i in range(928): #928
         images_urls.append([image_path, image_name])
     except Exception as e:
         print('')
+    try:
+        video = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[1]/video')
+        video_url = 'https://etesty2.mdcr.cz' + video.get_property('src')
+        videos.append([i+1, video_url])
+    except Exception as e:
+        print('')
     
     # CLICK CORRECT
     a = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[1]/p')
@@ -85,14 +95,14 @@ while i in range(928): #928
     answers_container = driver.find_elements(By.XPATH, '//*[@id="questionContentID"]/div[2]/*')
     if len(answers_container) == 3:
         c = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[3]/p')
-        print(question_num)
+        """print(question_num)
         print(type(c))
-        print()
+        print()"""
     elif len(answers_container) == 2:
         c = ''
-        print(question_num)
+        """print(question_num)
         print(type(c))
-        print()
+        print()"""
     else: print('Some error')
     correct_answer = driver.find_element(By.XPATH, '//*[@id="questionContentID"]/div[2]/div[contains(concat(" ", @class, " "), " correct ")]/p')
     correct = ''
@@ -108,16 +118,6 @@ while i in range(928): #928
     else:
         f.write(question + ';' + image_name + ';' + a.text + ';' + b.text + ';' + c + ';' + correct + '\n')
     f.close()
-    """
-    print(question_num)
-    print(question)
-    print('A       ' + a.text)
-    print('B       ' + b.text)
-    print('C       ' + c.text)
-    print('Correct ' + correct)
-    print('imgName ' + image_name)
-    print()
-    """
     
     next.click()
 
@@ -126,4 +126,7 @@ while i in range(928): #928
 for url in images_urls:
     download_image('./img/', url[0], url[1])
 
+for video in videos:
+    urllib.request.urlretrieve(video[1], str(video[0]) + '.mp4')
+    print(str(video[0]) + '.mp4')
 driver.quit()

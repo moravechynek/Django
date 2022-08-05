@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=9, IE=8, IE=EDGE" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="/Content/images/favicon.ico?636935523320000000" type="image/x-icon" />
+    <title>&#218;vodn&#237; str&#225;nka</title>
+    <script>
+		// Nastaveni zakladni cesty pro odkazy v externich .js souborech
+        var basePath = '/';
+    </script>
+
+    <link href="/Content/Styles/_LayoutStyles.css" rel="stylesheet"/>
+
+    <link href="/Content/themes/base/jquery-ui.css" rel="stylesheet"/>
+
+<script src="/Scripts/jquery-1.11.0.js"></script>
+<script src="/Scripts/jquery-3.5.1.js"></script>
+<script src="/Scripts/jquery-ui-1.10.4.js"></script>
+<script src="/Scripts/jquery-ui-1.12.1.js"></script>
+<link href="/Content/Styles/ButtonStyles.css" rel="stylesheet"/>
+<link href="/Content/Styles/ComponentStyles.less" rel="stylesheet"/>
+<link href="/Content/Styles/TextStyles.css" rel="stylesheet"/>
+
+    
+
+    
+    <link href="/Content/Styles/TitlePageStyles.css" rel="stylesheet"/>
+
+
+    <style>
+        .Footer {
+            position: fixed;
+            bottom: 0px;
+        }
+    </style>
+
+
+<style>
+    .no-close .ui-dialog-titlebar-close {
+        display: none;
+    }
+</style>
+
+    <script>
+        var zpravy = new Array();
+        var redirectUrl = "";        
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        
+
+        function modalQuickNewsDiallog(examTypeID, url) {
+            redirectUrl = url;
+            $.getJSON("/VyberRychleZpravy/GetQuickNews/" + examTypeID, function (data, status, jqxhr) {
+                // test cookie
+                var obj = null;
+                var newsTextShort = "";
+                var newsHeaderShort = "";
+                zpravy = data;
+                var consentCookie = document.cookie;
+                
+                
+               // zpravy.unshift({ "NewsID": 10000, "TestTypeExamID": 16, "NewsGroup": "B", "NewsTextShort": "Souhlas s cookies....." });
+                zobrazZpravy();
+
+            })
+        }
+        //
+
+        function zobrazZpravy() {
+            if (zpravy.length > 0) {
+                var zprava = $.parseJSON(JSON.stringify(zpravy.shift()));
+                newsTextShort = zprava.NewsTextShort;
+                newsHeaderShort = zprava.NewsHeaderShort;
+                $("#dialogMessage").html(newsTextShort);
+                $("#dialogMessage").dialog("option", "title", newsHeaderShort);
+                $("#dialogMessage").dialog("open");
+            } else {
+                window.location.href = redirectUrl;
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+    <div id="wrap">
+        <div class="Header">
+            <div style="height: 65px;overflow:auto;clear:both;position:relative;">
+    <a href="/"> <img style="margin: 15px 10px 5px 10px;position:absolute;left:0px;top:0px;" src="/Images/header_logo_etesty.png" /></a>                <a href="http://www.mdcr.cz"> <img style="margin: 15px 10px 5px 10px;position:absolute;right:0px;top:0px;" src="/Images/header_logo_md.png" /></a>
+            </div>
+        </div>
+
+        <div class="Menu">
+
+
+        </div>
+
+        <div id="main" class="Content">
+            
+
+
+<div style="margin:100px 0px 100px 0px;">
+
+    <div class="ButtonPanel" style="position:relative;">
+        <div class="Button" onclick="window.location = '/Home/Tests/ro'">
+            <div style="position:absolute;left:0px; width:100%;height:0px;"></div>
+            <div class="Image"><img src='/Images/ikona-auto.gif' /></div>
+            <div class="Title">Žadatel o řidičské oprávnění</div>
+            <div class="Text">
+                Příprava a informace ke zkoušce z&nbsp;předpisů o&nbsp;provozu na&nbsp;pozemních komunikacích a&nbsp;zdravotnické přípravy,
+                na&nbsp;základě zákona č.&nbsp;247/2000&nbsp;Sb., o&nbsp;získávání a&nbsp;zdokonalování odborné způsobilosti k&nbsp;řízení motorových
+                vozidel a&nbsp;o&nbsp;změnách některých zákonů.
+            </div>
+        </div>
+
+        <div class="Button" onclick="window.location='/Home/Tests/zpz'">
+            <div style="position:absolute;left:0px; width:100%;height:0px;"></div>
+            <div class="Image"><img src='/Images/ikona-volant.gif' /></div>
+            <div class="Title">Profesní způsobilost řidiče</div>
+            <div class="Text">
+                Příprava a informace ke zkoušce profesní způsobilosti, na základě vyhlášky č.&nbsp;156/2008&nbsp;Sb.,
+                o&nbsp;zdokonalování odborné způsobilosti řidičů a&nbsp;o&nbsp;změně vyhlášky
+            </div>
+        </div>
+
+        <div class="Button" onclick="window.location='/Home/Tests/zd'">
+            <div style="position:absolute;left:0px; width:100%;height:0px;"></div>
+            <div class="Image"><img src='/Images/ikona-nakladak.gif' /></div>
+            <div class="Title">Žadatel o odbornou způsobilost dopravců</div>
+            <div class="Text">
+                Příprava a informace k&nbsp;prokazování odborné způsobilosti dopravců podle zákona č.&nbsp;111/1994&nbsp;Sb.,
+                o&nbsp;silniční dopravě, ve&nbsp;znění pozdějších předpisů.
+            </div>
+        </div>
+
+    </div>    
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer">
+        <div>
+            <div style="width:1000px;margin:auto;height:60px;position:relative;">
+    <a style="position:absolute;left:0px;line-height:60px;top:0px">&copy; 2014 Ministerstvo dopravy</a>
+
+    <a style="position:absolute;right:0px;line-height:60px;top:0px;">Verze aplikace: 1.0.19.4 </a>
+    <a style="position:absolute;right:0px;bottom:4px;"><small><small>PROD-SQL1\SQL1/eKomunikace_PRODUKCE2</small></small> </a>
+</div>
+
+
+            
+
+        </div>
+    </div>
+    <div id="dialogMessage">
+    </div>
+    <div id="cookieConsentMessage">Na z&#225;kladě &#167; 89 z&#225;kona č. 127/2005 Sb., o elektronick&#253;ch komunikac&#237;ch, bychom V&#225;s r&#225;di informovali, že webov&#233; str&#225;nky Informačn&#237;ho syst&#233;mu pro vykon&#225;v&#225;n&#237; elektronick&#253;ch testů využ&#237;vaj&#237; tzv. cookies, tedy mal&#233; textov&#233; soubory, kter&#233; si webov&#233; str&#225;nky ulož&#237; do Vašeho poč&#237;tače. Cookies jsou použ&#237;v&#225;ny v&#253;hradně k uložen&#237; Vašich nastaven&#237;, kter&#233; maj&#237; vliv na vzhled nebo chov&#225;n&#237; webu. Cookies nejsou využ&#237;v&#225;ny pro &#250;čely reklamy, neslouž&#237; k z&#237;sk&#225;v&#225;n&#237; jak&#253;chkoli osobn&#237;ch &#250;dajů nebo k identifikaci V&#225;s jako konkr&#233;tn&#237;ch osob či Vašeho poč&#237;tače.</div>
+    <script>
+        
+
+
+
+        $("#dialogMessage").dialog({
+            dialogClass: "no-close", 
+            close: function (event, ui) { zobrazZpravy() },
+            autoOpen: false,
+            width: 700,
+            modal: true,
+            buttons: {
+                OK: function () {                    
+                    $(this).dialog("close");
+                }
+            },
+
+        })
+
+        $("#cookieConsentMessage").dialog({
+            title: "Nastavení soukromí",
+            dialogClass: "no-close",
+            close: function (event, ui) { zobrazZpravy() },
+            autoOpen: false,
+            width: 700,
+            modal: true,
+            buttons: {
+                Souhlasím: function () {
+                    document.cookie = "etestySouhlasSCookies=yes; expires=Thu, 18 Dec 2038 12:00:00 UTC; path=/";
+                    $(this).dialog("close");
+                },
+                Nesouhlasím: function () { 
+                    var myDate = new Date();
+                    var timePortion = (myDate.getTime()) % (3600 * 1000 * 24);
+                /*var dateOnly = new Date(myDate - timePortion + (24 * 3600 * 1000) - myDate.getTimezoneOffset() * 60 * 1000);*/
+                    var dateOnly = new Date(myDate - timePortion + (24 * 3600 * 1000));
+                    var tomorrow = dateOnly.toUTCString();                    
+                    document.cookie = "etestySouhlasSCookies=no; expires=" + tomorrow + "; path=/";
+                    $(this).dialog("close");
+                }
+            },
+
+        })
+        
+        if (getCookie('etestySouhlasSCookies') == "") {
+            $("#cookieConsentMessage").dialog('open');
+        }
+
+            
+    </script>
+</body>
+</html>
+
+<!--
+
+    1.0.19.4
+
+
+-->
