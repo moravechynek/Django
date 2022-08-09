@@ -93,8 +93,11 @@ class Otazka(models.Model):
     file = models.FileField(upload_to=get_image_otazky,
         blank=True)
     odpoved_a = models.TextField(max_length=300)
+    a_id = models.IntegerField(default=0)
     odpoved_b = models.TextField(max_length=300)
+    b_id = models.IntegerField(default=0)
     odpoved_c = models.TextField(max_length=300)
+    c_id = models.IntegerField(default=0)
     spravna_odpoved = models.CharField(max_length=1)
     FK_odstavec = models.ForeignKey(
         'Odstavec',
