@@ -66,3 +66,31 @@ def znacky(request):
         'znacky': znacky,
     }
     return HttpResponse(template.render(context, request))
+
+def temata(request):
+    pojmy = Otazka.objects.filter(orig_topic='Pojmy')
+    jizda = Otazka.objects.filter(orig_topic='Jizda')
+    ostatni = Otazka.objects.filter(orig_topic='Ostatni')
+    znacky = Otazka.objects.filter(orig_topic='Znacky')
+    situace = Otazka.objects.filter(orig_topic='Situace')
+    bezpecnostA = Otazka.objects.filter(orig_topic='BezpecnostA')
+    bezpecnostB = Otazka.objects.filter(orig_topic='BezpecnostB')
+    bezpecnostCD = Otazka.objects.filter(orig_topic='BezpecnostCD')
+    predpisy = Otazka.objects.filter(orig_topic='Predpisy')
+    provoz = Otazka.objects.filter(orig_topic='Provoz')
+    zdravi = Otazka.objects.filter(orig_topic='Zdravi')
+    template = loader.get_template('autoskola/temata.html')
+    context = {
+        'pojmy': pojmy,
+        'jizda': jizda,
+        'ostatni': ostatni,
+        'znacky': znacky,
+        'situace': situace,
+        'bezpecnostA': bezpecnostA,
+        'bezpecnostB': bezpecnostB,
+        'bezpecnostCD': bezpecnostCD,
+        'predpisy': predpisy,
+        'provoz': provoz,
+        'zdravi': zdravi,
+    }
+    return HttpResponse(template.render(context, request))

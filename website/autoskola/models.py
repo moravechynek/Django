@@ -1,4 +1,5 @@
 import os
+from pydoc_data.topics import topics
 from django.db import models
 
 def get_image_znacky(instance, filename):
@@ -99,6 +100,25 @@ class Otazka(models.Model):
     odpoved_c = models.TextField(max_length=300)
     c_id = models.IntegerField(default=0)
     spravna_odpoved = models.CharField(max_length=1)
+    TOPICS = [
+        ('Pojmy', 'Zákon č. 361/2000Sb. (Pojmy, povinnosti)'),
+        ('Jizda', 'Zákon č. 361/2000Sb. (Jízda vozidly)'),
+        ('Ostatni', 'Zákon č. 361/2000Sb. (Ostatní ustanovení)'),
+        ('Znacky', 'Dopravní značky'),
+        ('Situace', 'Řešení dopravních situací'),
+        ('BezpecnostA', 'Zásady bezpečné jízdy [A]'),
+        ('BezpecnostB', 'Zásady bezpečné jízdy [B]'),
+        ('BezpecnostCD', 'Zásady bezpečné jízdy [C,D]'),
+        ('Predpisy', 'Související předpisy'),
+        ('Provoz', 'Podmínky provozu vozidel'),
+        ('Zdravi', 'Zdravotnická příprava'),
+        ('Default','default')
+    ]
+    orig_topic = models.CharField(
+        max_length=12,
+        choices=TOPICS,
+        default='default'
+    )
     FK_odstavec = models.ForeignKey(
         'Odstavec',
         on_delete=models.CASCADE,

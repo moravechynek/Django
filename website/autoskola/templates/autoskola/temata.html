@@ -1,0 +1,457 @@
+{% extends "base.html" %}
+
+{% block title %}Autoskola{% endblock %}
+
+{% block style %}
+<style>
+    #pojmy,#jizda,#ostatni,#znacky,#situace,#bezpecnostA,#bezpecnostB,#bezpecnostCD,#predpisy,#provoz,#zdravi  {display:none;}
+</style>
+{% endblock %}
+
+{% block headline %}<h1 class="text-center py-3">Otázky podle témat</h1>{% endblock %}
+{% block content %}
+<button id="pojmy-btn">Zákon č. 361/2000Sb. (Pojmy, povinnosti)</button>
+<div id="pojmy">
+    {% for i in pojmy %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<button id="jizda-btn">Zákon č. 361/2000Sb. (Jízda vozidly)</button>
+<div id="jizda">
+    {% for i in jizda %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<button id="ostatni-btn">Zákon č. 361/2000Sb. (Ostatní ustanovení)</button>
+<div id="ostatni">
+    {% for i in ostatni %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<button id="znacky-btn">Dopravní značky</button>
+<div id="znacky">
+    {% for i in znacky %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<button id="situace-btn">Řešení dopravních situací</button>
+<div id="situace">
+    {% for i in situace %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<button id="bezpecnostA-btn">Zásady bezpečné jízdy [A]</button>
+<div id="bezpecnostA">
+    {% for i in bezpecnostA %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<button id="bezpecnostB-btn">Zásady bezpečné jízdy [B]</button>
+<div id="bezpecnostB">
+    {% for i in bezpecnostB %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<button id="bezpecnostCD-btn">Zásady bezpečné jízdy [C,D]</button>
+<div id="bezpecnostCD">
+    {% for i in bezpecnostCD %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<button id="predpisy-btn">Související předpisy</button>
+<div id="predpisy">
+    {% for i in predpisy %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<button id="provoz-btn">Podmínky provozu vozidel</button>
+<div id="provoz">
+    {% for i in provoz %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<button id="zdravi-btn">Zdravotnická příprava</button>
+<div id="zdravi">
+    {% for i in zdravi %}
+    <div class="p-4">
+    <p><b>{{ i.id }}. {{ i.otazka }}</b></p>
+    {% if i.file%}
+    <img src={{ i.file.url }} alt={{ i.file.url }}>
+    {% endif %}
+    {% if i.spravna_odpoved == 'a' %}
+    <p><b>A: <span class="text-success">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+        {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'b' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-success">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-danger">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% elif i.spravna_odpoved == 'c' %}
+    <p><b>A: <span class="text-danger">{{ i.odpoved_a }}</b></span></p>
+    <p><b>B: <span class="text-danger">{{ i.odpoved_b }}</b></span></p>
+    {% if i.odpoved_c %}
+        <p><b>C: <span class="text-success">{{ i.odpoved_c }}</b></span></p>
+        {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+{% block script %}
+    pojmy_count = 0
+    pojmy = document.getElementById('pojmy');
+    btn_pojmy = document.getElementById('pojmy-btn');
+    btn_pojmy.addEventListener('click',function(){
+        if (pojmy_count % 2 == 0 || pojmy_count == 0){
+            pojmy.style.display = 'block';}
+        else{
+            pojmy.style.display = 'none';}
+        pojmy_count++;
+    });
+    jizda_count = 0
+    jizda = document.getElementById('jizda');
+    btn_jizda = document.getElementById('jizda-btn');
+    btn_jizda.addEventListener('click',function(){
+        if (jizda_count % 2 == 0 || jizda_count == 0){
+            jizda.style.display = 'block';}
+        else{
+            jizda.style.display = 'none';}
+        jizda_count++;
+    });
+    ostatni_count = 0
+    ostatni = document.getElementById('ostatni');
+    btn_ostatni = document.getElementById('ostatni-btn');
+    btn_ostatni.addEventListener('click',function(){
+        if (ostatni_count % 2 == 0 || ostatni_count == 0){
+            ostatni.style.display = 'block';}
+        else{
+            ostatni.style.display = 'none';}
+        ostatni_count++;
+    });
+    znacky_count = 0
+    znacky = document.getElementById('znacky');
+    btn_znacky = document.getElementById('znacky-btn');
+    btn_znacky.addEventListener('click',function(){
+        if (znacky_count % 2 == 0 || znacky_count == 0){
+            znacky.style.display = 'block';}
+        else{
+            znacky.style.display = 'none';}
+        znacky_count++;
+    });
+    situace_count = 0
+    situace = document.getElementById('situace');
+    btn_situace = document.getElementById('situace-btn');
+    btn_situace.addEventListener('click',function(){
+        if (situace_count % 2 == 0 || situace_count == 0){
+            situace.style.display = 'block';}
+        else{
+            situace.style.display = 'none';}
+        situace_count++;
+    });
+    bezpecnostA_count = 0
+    bezpecnostA = document.getElementById('bezpecnostA');
+    btn_bezpecnostA = document.getElementById('bezpecnostA-btn');
+    btn_bezpecnostA.addEventListener('click',function(){
+        if (bezpecnostA_count % 2 == 0 || bezpecnostA_count == 0){
+            bezpecnostA.style.display = 'block';}
+        else{
+            bezpecnostA.style.display = 'none';}
+        bezpecnostA_count++;
+    });
+    bezpecnostB_count = 0
+    bezpecnostB = document.getElementById('bezpecnostB');
+    btn_bezpecnostB = document.getElementById('bezpecnostB-btn');
+    btn_bezpecnostB.addEventListener('click',function(){
+        if (bezpecnostB_count % 2 == 0 || bezpecnostB_count == 0){
+            bezpecnostB.style.display = 'block';}
+        else{
+            bezpecnostB.style.display = 'none';}
+        bezpecnostB_count++;
+    });
+    bezpecnostCD_count = 0
+    bezpecnostCD = document.getElementById('bezpecnostCD');
+    btn_bezpecnostCD = document.getElementById('bezpecnostCD-btn');
+    btn_bezpecnostCD.addEventListener('click',function(){
+        if (bezpecnostCD_count % 2 == 0 || bezpecnostCD_count == 0){
+            bezpecnostCD.style.display = 'block';}
+        else{
+            bezpecnostCD.style.display = 'none';}
+        bezpecnostCD_count++;
+    });
+    predpisy_count = 0
+    predpisy = document.getElementById('predpisy');
+    btn_predpisy = document.getElementById('predpisy-btn');
+    btn_predpisy.addEventListener('click',function(){
+        if (predpisy_count % 2 == 0 || predpisy_count == 0){
+            predpisy.style.display = 'block';}
+        else{
+            predpisy.style.display = 'none';}
+        predpisy_count++;
+    });
+    provoz_count = 0
+    provoz = document.getElementById('provoz');
+    btn_provoz = document.getElementById('provoz-btn');
+    btn_provoz.addEventListener('click',function(){
+        if (provoz_count % 2 == 0 || provoz_count == 0){
+            provoz.style.display = 'block';}
+        else{
+            provoz.style.display = 'none';}
+        provoz_count++;
+    });
+    zdravi_count = 0
+    zdravi = document.getElementById('zdravi');
+    btn_zdravi = document.getElementById('zdravi-btn');
+    btn_zdravi.addEventListener('click',function(){
+        if (zdravi_count % 2 == 0 || zdravi_count == 0){
+            zdravi.style.display = 'block';}
+        else{
+            zdravi.style.display = 'none';}
+        zdravi_count++;
+    });
+{% endblock %}

@@ -10,4 +10,5 @@ urlpatterns = [
     path('statistiky', views.stat, name='stat'),
     path('data', views.get_data, name='data'),
     path('znacky',views.znacky, name='znacky'),
+    path('temata',views.temata, name='temata')
 ]
